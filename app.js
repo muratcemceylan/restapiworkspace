@@ -15,21 +15,14 @@ const valuePair = "BCHUSD";
 app.get('/:valuePair', (req, res) => {
     
     const baseUrl = 'https://api.kraken.com/0/public/Ticker?pair=';	
-    const apiId = valuePair;
-
-    const userLocation = (url1, url2) => {
-
-       let newUrl = url1 + url2;
-       return newUrl;
-    };	
-
-    const apiUrl = userLocation(baseUrl, apiId);
+    const apiUrl = baseUrl + valuePair;
     
 
     fetch(apiUrl)
     .then(res => res.json())
     .then(result => {        
         res.send({ result });
+        console.log( result );
     })
     .catch(err => {
         res.redirect('/error');
